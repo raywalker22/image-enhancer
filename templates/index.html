@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Image Enhancer</title>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 40px; background: #f4f4f4; }
+        input, button { padding: 10px; margin: 10px; }
+        img { max-width: 300px; margin: 10px; }
+        #spinner { display: none; }
+    </style>
+</head>
+<body>
+    <h1>AI Image Enhancer</h1>
+    <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required><br>
+        <img id="preview" src="#" alt="Preview" style="display:none;">
+        <br>
+        <button type="submit">Enhance Image</button>
+    </form>
+    <div id="spinner">Processing... Please wait ⏳</div>
+
+    <script>
+        const input = document.querySelector('input[type="file"]');
+        const preview = document.getElementById('preview');
+        input.addEventListener('change', e => {
+            const [file] = input.files;
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = 'block';
+            }
+        });
+
+        document.getElementById('uploadForm').addEventListener('submit', () => {
+            document.getElementById('spinner').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
